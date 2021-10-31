@@ -1,4 +1,3 @@
-import 'package:avatar_glow/avatar_glow.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text_example/api/speech_api.dart';
@@ -21,20 +20,6 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: Text(MyApp.title),
           centerTitle: true,
-          actions: [
-            Builder(
-              builder: (context) => IconButton(
-                icon: Icon(Icons.content_copy),
-                onPressed: () async {
-                  await FlutterClipboard.copy(text);
-
-                  Scaffold.of(context).showSnackBar(
-                    SnackBar(content: Text('✓   Copied to Clipboard')),
-                  );
-                },
-              ),
-            ),
-          ],
         ),
         body: SingleChildScrollView(
           reverse: true,
@@ -55,15 +40,11 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: AvatarGlow(
-          animate: isListening,
-          endRadius: 75,
-          glowColor: Theme.of(context).primaryColor,
-          child: FloatingActionButton(
+        floatingActionButton: FloatingActionButton(
             child: Icon(isListening ? Icons.mic : Icons.mic_none, size: 36),
             onPressed: toggleRecording,
+          backgroundColor: Colors.black,
           ),
-        ),
       );
 
   Future toggleRecording() => SpeechApi.toggleRecording(
